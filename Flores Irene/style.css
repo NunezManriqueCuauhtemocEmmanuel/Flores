@@ -1,0 +1,179 @@
+:root{
+  --sky-top:#dff6ff;
+  --sky-bottom:#b0ccff;
+  --petal:#f6b93b;
+  --petal-dark:#e2971f;
+  --center:#7a4a20;
+  --center-dark:#5c3617;
+  --stem:#4c7a3d;
+  --stem-dark:#356028;
+  --ink:#3d2b12;
+  --paper:#fffaf0;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(120% 100% at 50% 0%, var(--sky-top), var(--sky-bottom));
+  color: var(--ink);
+  overflow-x:hidden;
+  position:relative;
+}
+
+.stage{
+  position:relative;
+  width:min(560px, 92vw);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2.2rem;
+  padding: 3rem 1rem 4rem;
+}
+
+.prompt{
+  font-size:clamp(1.3rem, 4vw, 1.9rem);
+  text-align:center;
+  line-height:1.4;
+  letter-spacing:0.01em;
+  max-width: 22ch;
+  transition: opacity .5s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.prompt.hidden{ opacity:0; height:0; overflow:hidden; margin:0; }
+
+button.grow-btn{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  font-size: 1.05rem;
+  letter-spacing:0.02em;
+  padding: 0.95rem 2.3rem;
+  border-radius: 999px;
+  border: 2px solid var(--center-dark);
+  background: var(--petal);
+  color: var(--center-dark);
+  cursor:pointer;
+  box-shadow: 0 6px 0 var(--petal-dark), 0 10px 18px rgba(90,55,10,0.25);
+  transform: translateY(0);
+  transition: all 0.3s;
+}
+button.grow-btn:hover{ transform: translateY(-2px); }
+button.grow-btn:active{
+  transform: translateY(20px);
+  box-shadow: 0 2px 0 var(--petal-dark), 0 4px 10px rgba(90,55,10,0.25);
+}
+button.grow-btn:focus-visible{ outline: 3px solid var(--center-dark); outline-offset:3px; }
+button.grow-btn.done{
+  opacity:0;
+  pointer-events:none;
+  position:absolute;
+}
+
+.bouquet-wrap{
+  position:relative;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  min-height: 300px;
+}
+
+svg.bouquet{
+  width: min(480px, 88vw);
+  height:auto;
+  overflow:visible;
+}
+
+.flower{
+  transform-origin: 50% 100%;
+  transform: scale(0);
+  opacity:0;
+}
+.flower.pop{
+  animation: pop-in 0.7s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes pop-in{
+  0%{ transform: scale(0) rotate(var(--start-rot, 0deg)); opacity:0; }
+  60%{ transform: scale(1.12) rotate(var(--end-rot,0deg)); opacity:1; }
+  100%{ transform: scale(1) rotate(var(--end-rot,0deg)); opacity:1; }
+}
+
+.stem-line{
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+}
+.stem-line.draw{
+  animation: draw-stem .5s ease forwards;
+}
+@keyframes draw-stem{
+  to{ stroke-dashoffset:0; }
+}
+
+.ribbon{
+  opacity:0;
+  transform: translateY(6px);
+}
+.ribbon.show{
+  animation: ribbon-in .5s ease forwards;
+  animation-delay: .3s;
+}
+@keyframes ribbon-in{
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.message{
+  text-align:center;
+  opacity:0;
+  transform: translateY(10px) scale(0.9);
+}
+.message.show{
+  animation: message-in .6s cubic-bezier(.34,1.56,.64,1) forwards;
+  animation-delay: 1.1s;
+}
+@keyframes message-in{
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+.tqm{
+  font-size: clamp(2.6rem, 10vw, 4rem);
+  font-weight:700;
+  color: #2f3857;
+  letter-spacing: 0.03em;
+  margin:0;
+  text-shadow: 0 2px 0 rgba(255,255,255,0.4);
+}
+.subtext{
+  margin: 0.4rem 0 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+  opacity:0.85;
+}
+
+.again-btn{
+  font-size:0.95rem;
+  background:none;
+  border:none;
+  color: #2f3857;
+  text-decoration:underline;
+  cursor:pointer;
+  opacity:0;
+  margin-top:0.6rem;
+}
+.again-btn.show{
+  animation: fade-only .5s ease forwards;
+  animation-delay: 1.6s;
+}
+@keyframes fade-only{ to{ opacity:0.75; } }
+
+@media (prefers-reduced-motion: reduce){
+  .flower, .ribbon, .message, .again-btn, .stem-line{
+    animation: none !important;
+    opacity:1 !important;
+    transform:none !important;
+    stroke-dashoffset:0 !important;
+  }
+}
