@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flores amarillas para Rene 💛</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flores para Irene 💛</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="stage">
-    <p class="prompt" id="prompt">Presiona el botón Irene hermosa 💛</p>
+    <p class="prompt" id="prompt">Elige tus flores, Irene hermosa 💛</p>
+
+    <div class="choice-row" id="choiceRow">
+      <button class="grow-btn" id="sunflowerBtn">🌻 Flores amarillas</button>
+      <button class="grow-btn rose-btn" id="roseBtn">🌹 Ramo de rosas</button>
+    </div>
 
     <div class="bouquet-wrap">
       <svg class="bouquet" id="bouquet" viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
     </div>
 
-    <button class="grow-btn" id="growBtn">Presiona aquí 🌻</button>
-
     <div class="message" id="message">
-      <p class="tqm">TQM Irene 💛</p>
-      <p class="subtext">Te quiero mucho, mereces todas las flores del mundo 💛, la niña mas bonita de todas</p>
-      <button class="again-btn" id="againBtn">volver a florecer</button>
+      <p class="tqm" id="tqmText">TQM Irene 💛</p>
+      <p class="subtext" id="subText">Te quiero mucho, mereces todas las flores del mundo 💛, la niña más bonita de todas</p>
+      <div class="action-row">
+        <button class="again-btn" id="againBtn">volver a florecer</button>
+        <button class="switch-btn" id="switchBtn">elegir otras flores</button>
+      </div>
     </div>
   </div>
 
   <script src="script.js"></script>
-  
 </body>
 </html>
